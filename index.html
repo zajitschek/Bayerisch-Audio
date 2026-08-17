@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayerischer Sprachkurs - Kurz & Bündig</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --accent-blue: #3498db;
+            --accent-hover: #2980b9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .phrase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .phrase-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phrase-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .phrase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--accent-blue);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .phrase-card:hover::before {
+            opacity: 1;
+        }
+
+        .phrase-content {
+            margin-bottom: 16px;
+        }
+
+        .bayerisch {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .hochdeutsch {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .play-button {
+            align-self: flex-start;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .phrase-card:hover .play-button {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-left: 8px solid var(--accent-blue);
+            border-bottom: 5px solid transparent;
+            transition: border-left-color 0.2s ease;
+        }
+
+        .phrase-card:hover .play-icon {
+            border-left-color: #ffffff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Bayerisch für Einsteiger</h1>
+        <p>Klicke auf eine Karte, um die Aussprache zu hören.</p>
+    </header>
+
+    <main class="phrase-grid">
+        <div class="phrase-card" onclick="playPhrase('audio1.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wia geht's?</div>
+                <div class="hochdeutsch">Wie geht's?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio2.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Hods gschmeckt?</div>
+                <div class="hochdeutsch">Hat es geschmeckt?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio3.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wos wuist denn zum tringa?</div>
+                <div class="hochdeutsch">Was willst du denn zum trinken?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio4.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Griass de</div>
+                <div class="hochdeutsch">Hallo</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio5.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Pfiad di</div>
+                <div class="hochdeutsch">Auf Wiedersehen</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio6.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Dank da schee</div>
+                <div class="hochdeutsch">Dankeschön</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio7.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Bittschee</div>
+                <div class="hochdeutsch">Bitte sehr</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio8.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">An Guadn</div>
+                <div class="hochdeutsch">Guten Appetit</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio9.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des is fei schee</div>
+                <div class="hochdeutsch">Das ist aber schön</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio10.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Guadn Moagn</div>
+                <div class="hochdeutsch">Guten Morgen</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio11.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">GuadNacht</div>
+                <div class="hochdeutsch">Gute Nacht</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio12.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mia geht's guad</div>
+                <div class="hochdeutsch">Mir geht es gut</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio13.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">I versteh di ned</div>
+                <div class="hochdeutsch">Ich verstehe dich nicht</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio14.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Ois Guade</div>
+                <div class="hochdeutsch">Alles Gute</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio15.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wos is'n des?</div>
+                <div class="hochdeutsch">Was ist das?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio16.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">I mog di</div>
+                <div class="hochdeutsch">Ich mag dich</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio17.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Schau ma amoi!</div>
+                <div class="hochdeutsch">Schauen wir mal!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio18.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Gemma!</div>
+                <div class="hochdeutsch">Lass uns gehen!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio19.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Passt scho</div>
+                <div class="hochdeutsch">Passt schon / Beruhige dich</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio20.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des is pfundig!</div>
+                <div class="hochdeutsch">Das ist ja super!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio21.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Nur ned hudln</div>
+                <div class="hochdeutsch">Nur keine Hektik</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio22.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Pfeigrod</div>
+                <div class="hochdeutsch">Genau</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio23.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des is mia wurscht</div>
+                <div class="hochdeutsch">Das ist mir egal</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio24.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">A bissl</div>
+                <div class="hochdeutsch">Ein bisschen</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio25.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Kimm zura</div>
+                <div class="hochdeutsch">Komm her</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio26.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Griaß Gott</div>
+                <div class="hochdeutsch">Grüß Gott</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio27.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wos mochst'n du do?</div>
+                <div class="hochdeutsch">Was machst du da?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio28.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Schees Wehda heid</div>
+                <div class="hochdeutsch">Schönes Wetter heute</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio29.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des is fei schohd</div>
+                <div class="hochdeutsch">Das ist wirklich schade</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio30.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Bis nachha</div>
+                <div class="hochdeutsch">Bis gleich / Bis später</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio31.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Nix gwieß woas ma ned</div>
+                <div class="hochdeutsch">Man weiß nichts genaues</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio32.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">A geh</div>
+                <div class="hochdeutsch">Ach komm!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio33.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Schleich de!</div>
+                <div class="hochdeutsch">Hau ab!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio34.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mai bisdu gscheid</div>
+                <div class="hochdeutsch">omg, bist du schlau</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio35.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mai bisdu blehd</div>
+                <div class="hochdeutsch">omg, bist du blöd</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio36.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Gscheidhaferl</div>
+                <div class="hochdeutsch">Besserwisser</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio37.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des wor a Gaudi!</div>
+                <div class="hochdeutsch">Das hat Spaß gemacht!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio38.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wia schaugtsn aus?</div>
+                <div class="hochdeutsch">Wie schaut’s aus?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio39.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Geht wos zsam?</div>
+                <div class="hochdeutsch">Geht was?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio40.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Des is fei guad!</div>
+                <div class="hochdeutsch">Dad ist aber gut!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio41.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Bist eppa deppad?</div>
+                <div class="hochdeutsch">Bist du blöd, oder was?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio42.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Pass fei auf, gei!</div>
+                <div class="hochdeutsch">Pass auf, gell!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio43.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Drunt in da greana Au, steht a Birnbaum schee blau, juchhe!</div>
+                <div class="hochdeutsch">Unten, in der grünen Aue steht ein Birnbaum schön blau, juchhe (Liedtext)</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio44.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">MeinGod, wos isn dees!</div>
+                <div class="hochdeutsch">Mein Gott, was ist denn das?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio45.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wos no ois?</div>
+                <div class="hochdeutsch">Was noch alles?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio46.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Schdei da voa, der hod gwunna!</div>
+                <div class="hochdeutsch">Stell dir vor, der hat gewonnen!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio47.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Du glabst as ned!</div>
+                <div class="hochdeutsch">Du glaubst es nicht!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio48.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mir ham uns a soo gfreid!</div>
+                <div class="hochdeutsch">Wir haben uns so gefreut!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio49.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mia föid nix!</div>
+                <div class="hochdeutsch">Mir fehlt nichts!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio50.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Hammas?</div>
+                <div class="hochdeutsch">Haben wir’s?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio51.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Kimma geh?</div>
+                <div class="hochdeutsch">Können wir gehen?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio52.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Wer zoit?</div>
+                <div class="hochdeutsch">Wer zahlt?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio53.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mia san soo guad!</div>
+                <div class="hochdeutsch">Wir sind so gut!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio54.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Mia san sowos vo guad!</div>
+                <div class="hochdeutsch">Wir sind sowas von gut!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio55.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Sauba aufgschpuid!</div>
+                <div class="hochdeutsch">Toll Musik gemacht!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio56.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">I bin eh vo Possau han eh koa Göid!</div>
+                <div class="hochdeutsch">Ich bin sowieso aus Passau, ich habe eh kein Geld!</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio57.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">I bin eh doh, wos wuistn?</div>
+                <div class="hochdeutsch">Ich bin sowieso da, was willst du denn?</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+
+        <div class="phrase-card" onclick="playPhrase('audio58.m4a')">
+            <div class="phrase-content">
+                <div class="bayerisch">Die haut da Dhaftl eini dosd grod aso schaugst.</div>
+                <div class="hochdeutsch">Die zeigt's, dass dunur so schaust.</div>
+            </div>
+            <button class="play-button"><span class="play-icon"></span> Anhören</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Erstellt als kurzer bayerischer Audiokurs.</p>
+    </footer>
+</div>
+
+<audio id="global-player" preload="auto"></audio>
+
+<script>
+    const player = document.getElementById('global-player');
+
+    function playPhrase(fileName) {
+        player.src = 'audio/' + fileName;
+        player.play().catch(error => {
+            console.log("Audio-Wiedergabe fehlgeschlagen:", error);
+        });
+    }
+</script>
+
+</body>
+</html>
